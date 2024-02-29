@@ -1,0 +1,70 @@
+*,*::before,*::after{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.board{
+    display: grid;
+    grid-template-columns: repeat(8,50px);
+    grid-template-rows: repeat(8,50px);
+}
+
+.square{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .4s ease;
+}
+
+.piece{
+    width: 75%;
+    height: 75%;
+    border-radius: 50%;
+    transition: opacity 1s ease;
+}
+
+.piece:hover{
+    cursor: pointer;
+}
+
+.grey{
+    background-color: #4c4c4c;
+}
+
+.white{
+    background-color: white;
+}
+
+.black{
+    background-color: black;
+}
+
+.selected{
+    border: 2px solid greenyellow;
+}
+
+.valid{
+    background-color: lightgreen;
+    z-index: 1;
+}
+
+.red{
+    background-color: red;
+}
+
+.darken{
+    filter: brightness(.75);
+}
+
+.valid:hover{
+    cursor: pointer;
+}
