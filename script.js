@@ -148,7 +148,12 @@ function initBoard(){
 }
 
 function selectPiece(piece){
-    if(piece == selectedPiece) return;
+    if(piece === selectedPiece) return;
+    let pieceObj = getPiece(piece.id);
+    
+    if(captureRoutes.length && !captureRoutes.includes(pieceObj)){
+        return;
+    }
 
     removeSquaresSelection();
 
@@ -163,8 +168,10 @@ function selectPiece(piece){
     selectedPiece = piece;
     piece.classList.add("selected");
 
+    if(captureRoutes.length)
+        return showCaptureRoutes(getPiece(selectedPiece.id));
+    
     showValidSquares();
-
 }
 
 function showValidSquares(){
@@ -252,8 +259,6 @@ function checkCapture(){
     pieces = pieces.filter(piece => piece.pathLen == maxLen)
     
     captureRoutes = pieces;
-    
-    darkenSquares()
 }
 
 function getCaptureRoutes(piece,path,squares,routes){ 
@@ -287,8 +292,13 @@ function getCaptureRoutes(piece,path,squares,routes){
     routes.push(path);
 }
 
-function capturePiece(){
-
+function showCaptureRoutes(piece){
+    piece.routes.forEach((route) => {
+        for (let i = 2; i < route.length; i += 2) {
+            let htmlSquare = document.getElementById(`${route[i].pos}`)
+            htmlSquare.classList.add('red');    
+        }
+    })
 }
 
 
@@ -306,11 +316,19 @@ function darkenSquares(){
     })
 }
 
+function getPiece(id){
+    if(id[0] === 'w'){
+        return whitePieces[id.slice(1)];
+    }
+    return blackPieces[id.slice(1)];
+}
+
 initBoard();
 
 
 
 document.addEventListener('keydown', () => {
     checkCapture();
+    console.log(captureRoutes);
 })
 
