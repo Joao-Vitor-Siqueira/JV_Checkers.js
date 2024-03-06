@@ -293,6 +293,7 @@ function getCaptureRoutes(piece,path,squares,routes){
 }
 
 function showCaptureRoutes(piece){
+    darkenSquares()
     piece.routes.forEach((route) => {
         for (let i = 2; i < route.length; i += 2) {
             let htmlSquare = document.getElementById(`${route[i].pos}`)
@@ -313,6 +314,13 @@ function darkenSquares(){
     squareDivs.forEach(square => {
         if(square.classList.contains("white"))
             square.classList.add("darken");
+    })
+}
+
+function lightenSquares(){
+    squareDivs.forEach(square => {
+        if(square.classList.contains("white"))
+            square.classList.remove("darken");
     })
 }
 

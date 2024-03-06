@@ -65,6 +65,6 @@ body{
     filter: brightness(.75);
 }
 
-.valid:hover{
+.valid:hover,.red:hover{
     cursor: pointer;
 }
